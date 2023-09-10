@@ -9,8 +9,15 @@
 #include <algorithm>
 #include <cassert>
 #include "imgui.h"
+#include <fstream>
+#include <string>
+#include <sstream>
+#include <vector>
 
 
+// CSVファイルをカンマ区切りにする
+using namespace std;
+vector<string> split(string& input, char delimiter);
 
 
 ///// 3次元ベクトル

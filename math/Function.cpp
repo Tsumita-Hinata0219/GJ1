@@ -2,6 +2,20 @@
 
 
 
+
+// CSVファイルをカンマ区切りにする
+vector<string> split(string& input, char delimiter) {
+	istringstream stream(input);
+	string field;
+	vector<string> result;
+	while (getline(stream, field, delimiter)) {
+		result.push_back(field);
+	}
+	return result;
+}
+
+
+
 // 加算
 Vector3 Add(const Vector3 v1, const Vector3 v2) {
 	Vector3 result{};

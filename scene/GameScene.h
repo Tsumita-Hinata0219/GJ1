@@ -8,10 +8,16 @@
 #include "Sprite.h"
 #include "ViewProjection.h"
 #include "WorldTransform.h"
-
 #include "DebugCamera.h"
 
+#include "Map.h"
+#include "Function.h"
 
+#include <list>
+#include <sstream>
+#include <fstream>
+#include <string>
+#include <iostream>
 
 
 /// <summary>
@@ -73,6 +79,20 @@ private: // メンバ変数
 
 	// ビュープロジェクション
 	ViewProjection viewProjection_;
+
+
+
+
+	/* ----- マップ Map ----- */
+	// マップ
+	Map* map_ = nullptr;
+	// マップリスト
+	std::list<Map*> mapBoxs_;
+	// マップ生成コマンド
+	std::stringstream mapBoxCreateCommands_;
+	// テクスチャ
+	uint32_t mapBoxTextureHandle_ = 0;
+
 
 
 	/* ----- Camera カメラ ----- */
