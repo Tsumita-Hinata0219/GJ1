@@ -92,6 +92,7 @@ private: // メンバ変数
 	std::stringstream mapBoxCreateCommands_;
 	// テクスチャ
 	uint32_t mapBoxTextureHandle_ = 0;
+	StageData stage_;
 
 
 

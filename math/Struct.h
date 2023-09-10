@@ -5,17 +5,12 @@
 #include <Matrix4x4.h>
 
 
-// サウンド
-struct Sound {
-	uint32_t game;
-	uint32_t over;
-	uint32_t clear;
-	uint32_t boss;
-	uint32_t decision;
-	uint32_t eneDie;
-	uint32_t plaDie;
-	uint32_t plaDamage;
-	uint32_t shoot1;
+// マップCSV
+struct StageData {
+	const char* one;
+	const char* two;
+	const char* three;
+	const char* four;
 };
 
 

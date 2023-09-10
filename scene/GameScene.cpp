@@ -43,8 +43,11 @@ void GameScene::Initialize() {
 	map_->Initialize(model_, position, mapBoxTextureHandle_);
 	// ゲームシーンを渡す
 	map_->SetGameScene(this);
+	// ステージのCSV
+	stage_.one = ("Resources/parameter/demoMap1.csv");
+	stage_.two = ("Resources/parameter/demoMap2.csv");
 	// CSVを読み込む
-	LoadMapData("Resources/parameter/demoMap.csv");
+	LoadMapData(stage_.two);
 
 
 
