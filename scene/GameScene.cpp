@@ -25,6 +25,9 @@ GameScene::~GameScene() {
 
 	// ゲームカメラ
 	delete gameCamera_;
+
+	// コライダー
+	delete collisionManager_;
 }
 
 void GameScene::Initialize() {
@@ -65,7 +68,7 @@ void GameScene::Initialize() {
 	map_ = new Map();
 	Vector3 position(0.0f, 0.0f, 0.0f);
 	// 初期化
-	map_->Initialize(model_, position, stage_.boxTexture[0]);
+	map_->Initialize(model_, position, stage_.boxTexture[0], kCollisionAttributeMapBox_Ground);
 	// ゲームシーンを渡す
 	map_->SetGameScene(this);
 	// CSVを読み込む
@@ -81,6 +84,11 @@ void GameScene::Initialize() {
 	modelSkydome_ = Model::CreateFromOBJ("Skydome", true);
 	skydome_ = new Skydome();
 	skydome_->Initialize(modelSkydome_);
+
+
+
+	/* ----- CollisionManager 当たり判定 ----- */
+	collisionManager_ = new CollisionManager();
 
 
 
@@ -112,7 +120,6 @@ void GameScene::Update() {
 
 
 	/* ----- Map マップ ----- */
-	// マップを生成する
 	for (Map* map : mapBoxs_) {
 		map->Update();
 	}
@@ -120,13 +127,14 @@ void GameScene::Update() {
 	UpdateMapData(nowMap_);
 
 
-
 	/* ----- Skydome 天球 ----- */
 	skydome_->Update();
 
 
-	onCollision();
-	//CheckAllCollision();
+	/* ----- CollisionManager 当たり判定 ----- */
+	CheckAllCollision();
+
+
 
 #ifdef _DEBUG
 
@@ -191,61 +199,25 @@ void GameScene::Update() {
 	}
 }
 
-void GameScene::onCollision() {
+void GameScene::CheckAllCollision() {
+
+	// コライダーリストをクリアにする
+	collisionManager_->ColliderClear();
 
 	// コライダー
 	std::list<Collider*> colliders_;
 
 	// コライダーをリストに登録
-	colliders_.push_back(player_);
+	// プレイヤー
+	collisionManager_->ColliderPushBack(player_);
+
+	// マップボックス
 	for (Map* map : mapBoxs_) {
-		colliders_.push_back(map);
-	}
-	// リスト内のペアを総当たり
-	std::list<Collider*>::iterator itrA = colliders_.begin();
-	for (; itrA != colliders_.end(); ++itrA) {
-
-		// イテレータAからコライダーAを取得する
-		Collider* colliderA = *itrA;
-
-		// イテレータBはイテレータAの次の要素から回す(重複判定を回避)
-		std::list<Collider*>::iterator itrB = itrA;
-		itrB++;
-
-		for (; itrB != colliders_.end(); ++itrB) {
-
-			// イテレータBからコライダーBを取得する
-			Collider* colliderB = *itrB;
-
-			// ペアの当たり判定
-			CheckCollisitionPair(colliderA, colliderB);
-		}
-	}
-}
-
-void GameScene::CheckCollisitionPair(Collider* colliderA, Collider* colliderB) {
-
-	// 衝突フィルタリング
-	if ((colliderA->GetCollisionAttribute() & colliderB->GetCollisionMask()) == 0 ||
-	    (colliderB->GetCollisionAttribute() & colliderA->GetCollisionMask()) == 0) {
-
-		// 属性判定の時点で当たらないペアの場合は、早期リターン
-		return;
+		collisionManager_->ColliderPushBack(map);
 	}
 
-	AABB aabb1 = colliderA->GetAABB();
-	AABB aabb2 = colliderB->GetAABB();
-
-	// AABB1とAABB2の衝突判定
-	if ((aabb1.min.x <= aabb2.max.x && aabb1.max.x >= aabb2.min.x) &&
-	    (aabb1.min.y <= aabb2.max.y && aabb1.max.y >= aabb2.min.y) &&
-	    (aabb1.min.z <= aabb2.max.z && aabb1.max.z >= aabb2.min.z)) {
-
-		// コライダーAの衝突時コールバッグを呼び出す
-		colliderA->onCollision();
-		// コライダーBの衝突時コールバッグを呼び出す
-		colliderB->onCollision();
-	}
+	// コライダー2つの衝突判定 今回はAABB
+	collisionManager_->CheckRoundRobin();
 }
 
 void GameScene::Draw() {
@@ -384,22 +356,27 @@ void GameScene::UpdateMapData(int index) {
 			if (stoi(strvec.at(colmnCount)) == 1) {
 
 				// 座標を決めてブロックを生成
-				GeneratedMap(CreateMapVector(colmnCount, lineCount), stage_.boxTexture[1]);
+				GeneratedMap(CreateMapVector(
+					colmnCount, lineCount), stage_.boxTexture[1], kCollisionAttributeMapBox_Ground);
 			}
 			else if (stoi(strvec.at(colmnCount)) == 2) {
 
 				// 座標を決めてブロックを生成
-				GeneratedMap(CreateMapVector(colmnCount, lineCount), stage_.boxTexture[2]);
+				GeneratedMap(
+				    CreateMapVector(
+						colmnCount, lineCount), stage_.boxTexture[2], kCollisionAttributeMapBox_Damage);
 			}
 			else if (stoi(strvec.at(colmnCount)) == 3) {
 
 				// 座標を決めてブロックを生成
-				GeneratedMap(CreateMapVector(colmnCount, lineCount), stage_.boxTexture[3]);
+				GeneratedMap(CreateMapVector(
+					colmnCount, lineCount), stage_.boxTexture[3], kCollisionAttributeMapBox_State);
 			} 
 			else if (stoi(strvec.at(colmnCount)) == 5) {
 
 				// 座標を決めてブロックを生成
-				GeneratedMap(CreateMapVector(colmnCount, lineCount), stage_.boxTexture[5]);
+				GeneratedMap(CreateMapVector(
+					colmnCount, lineCount), stage_.boxTexture[5], kCollisionAttributeMapBox_Goal);
 			}
 		}
 		// カウントに1を足す
@@ -428,12 +405,12 @@ Vector3 GameScene::CreateMapVector(int indexX, int indexY) {
 /// <summary>
 /// マップを生成する
 /// </summary>
-void GameScene::GeneratedMap(Vector3 position, uint32_t mapBoxTextureHandle) {
+void GameScene::GeneratedMap(Vector3 position, uint32_t mapBoxTextureHandle, uint32_t filter) {
 
 	// 生成
 	map_ = new Map();
 	// 初期化
-	map_->Initialize(model_, position, mapBoxTextureHandle);
+	map_->Initialize(model_, position, mapBoxTextureHandle, filter);
 	// ゲームシーンを渡す
 	map_->SetGameScene(this);
 	// マップを登録する

@@ -10,9 +10,9 @@ class CollisionManager {
 public:
 
 	/// <summary>
-	/// 衝突判定と応答
+	/// 総当たりの判定
 	/// </summary>
-	void CheckAllCollision();
+	void CheckRoundRobin();
 
 	/// <summary>
 	/// コライダーを受け取り、リストに登録する

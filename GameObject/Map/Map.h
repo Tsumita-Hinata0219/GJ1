@@ -25,7 +25,7 @@ public:
 	/// <summary>
 	/// 初期化処理
 	/// </summary>
-	void Initialize(Model* model, Vector3 position,  uint32_t textureHandle);
+	void Initialize(Model* model, Vector3 position, uint32_t textureHandle, uint32_t filter);
 
 	/// <summary>
 	/// 更新処理

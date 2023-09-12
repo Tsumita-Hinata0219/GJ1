@@ -5,7 +5,7 @@
 /// <summary>
 /// 初期化処理
 /// </summary>
-void Map::Initialize(Model* model, Vector3 position, uint32_t textureHandle) {
+void Map::Initialize(Model* model, Vector3 position, uint32_t textureHandle, uint32_t filter) {
 
 	// NULLポインタチェック
 	assert(model);
@@ -17,7 +17,7 @@ void Map::Initialize(Model* model, Vector3 position, uint32_t textureHandle) {
 	worldTransform_.Initialize();
 
 	// 衝突属性
-	SetCollisionAttribute(kCollisionAttributeMapBox);
+	SetCollisionAttribute(filter);
 	SetCollisionMask(kCollisionAttributePlayer);
 }
 

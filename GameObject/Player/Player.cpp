@@ -26,7 +26,13 @@ void Player::Initialize(Model* model, Vector3 position) {
 
 	// 衝突属性
 	SetCollisionAttribute(kCollisionAttributePlayer);
-	SetCollisionMask(kCollisionAttributeMapBox);
+
+	uint32_t newCollisionAttribute = 0;
+	newCollisionAttribute = newCollisionAttribute | kCollisionAttributeMapBox_Ground;
+	newCollisionAttribute = newCollisionAttribute | kCollisionAttributeMapBox_Damage;
+	newCollisionAttribute = newCollisionAttribute | kCollisionAttributeMapBox_State;
+	newCollisionAttribute = newCollisionAttribute | kCollisionAttributeMapBox_Goal;
+	SetCollisionMask(newCollisionAttribute);
 }
 
 
@@ -58,7 +64,6 @@ void Player::Update() {
 
 	ImGui::DragFloat3("Pla_Min", &aabb_.min.x, 0.1f, -1.0f, 5.0f);
 	ImGui::DragFloat3("Pla_Max", &aabb_.max.x, 0.1f, -1.0f, 5.0f);
-
 
 	ImGui::End();
 

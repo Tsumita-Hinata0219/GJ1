@@ -3,9 +3,9 @@
 
 
 /// <summary>
-/// 衝突判定と応答
+/// 総当たりの判定
 /// </summary>
-void CollisionManager::CheckAllCollision() {
+void CollisionManager::CheckRoundRobin() {
 
 	// リスト内のペアを総当たり
 	std::list<Collider*>::iterator itrA = colliders_.begin();
@@ -36,7 +36,15 @@ void CollisionManager::CheckAllCollision() {
 /// </summary>
 void CollisionManager::CheckCollisionPair(Collider* colliderA, Collider* colliderB) {
 
+	// 衝突フィルタリング
+	if ((colliderA->GetCollisionAttribute() & colliderB->GetCollisionMask()) == 0 ||
+	    (colliderB->GetCollisionAttribute() & colliderA->GetCollisionMask()) == 0) {
 
+		// 像区政判定の時点で当たらないペアの場合は早期リターン
+		return;
+	}
+
+	// 2つのオブジェクトのAABBを取得
 	AABB aabb1 = colliderA->GetAABB();
 	AABB aabb2 = colliderB->GetAABB();
 

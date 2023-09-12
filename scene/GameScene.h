@@ -61,15 +61,13 @@ public: // メンバ関数
 	/// <summary>
 	/// 衝突判定と応答
 	/// </summary>
-	//void CheckAllCollision();
+	void CheckAllCollision();
 
 
 	/// <summary>
 	/// ステージを変更する
 	/// </summary>
 	void ChangeStage(int index);
-
-	void onCollision();
 
 
 	/// <summary>
@@ -90,12 +88,7 @@ public: // メンバ関数
 	/// <summary>
 	/// マップを生成する
 	/// </summary>
-	void GeneratedMap(Vector3 pos, uint32_t mapBoxTextureHandle);
-
-
-private:
-
-	void CheckCollisitionPair(Collider* colliderA, Collider* colliderB);
+	void GeneratedMap(Vector3 pos, uint32_t mapBoxTextureHandle, uint32_t filter);
 
 
 private: // メンバ変数
