@@ -10,7 +10,8 @@ GameScene::~GameScene() {
 	//* 解放処理 *//
 
 	// Player プレイヤー
-	delete player_;
+	//delete player_;
+	delete demoPlayer_;
 
 	// Model モデル
 	delete model_;
@@ -46,9 +47,12 @@ void GameScene::Initialize() {
 
 
 	/* ----- Player 自キャラ ----- */
-	player_ = new Player();
-	Vector3 playerPosition(0.0f, 10.0f, 0.0f);
-	player_->Initialize(model_, playerPosition);
+	//player_ = new Player();
+	//Vector3 playerPosition(0.0f, 10.0f, 0.0f);
+	//player_->Initialize(model_, playerPosition);
+	demoPlayer_ = new DemoPlayer();
+	Vector3 deoPlayerPos(0.0f, 0.0f, 0.0f);
+	demoPlayer_->Initialize(model_, deoPlayerPos);
 
 
 
@@ -116,7 +120,8 @@ void GameScene::Update() {
 
 
 	/* ----- Player 自キャラ ----- */
-	player_->Update();
+	//player_->Update();
+	demoPlayer_->Update();
 
 
 	/* ----- Map マップ ----- */
@@ -209,7 +214,8 @@ void GameScene::CheckAllCollision() {
 
 	// コライダーをリストに登録
 	// プレイヤー
-	collisionManager_->ColliderPushBack(player_);
+	//collisionManager_->ColliderPushBack(player_);
+	collisionManager_->ColliderPushBack(demoPlayer_);
 
 	// マップボックス
 	for (Map* map : mapBoxs_) {
@@ -248,7 +254,8 @@ void GameScene::Draw() {
 	/// </summary>
 
 	/* ----- Player 自キャラ ----- */
-	player_->Draw(viewProjection_);
+	//player_->Draw(viewProjection_);
+	demoPlayer_->Draw(viewProjection_);
 
 
 

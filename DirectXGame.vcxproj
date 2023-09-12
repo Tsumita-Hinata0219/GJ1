@@ -111,6 +111,7 @@
     <ClCompile Include="base\WinApp.cpp" />
     <ClCompile Include="GameObject\GameCamera\GameCamera.cpp" />
     <ClCompile Include="GameObject\Map\Map.cpp" />
+    <ClCompile Include="GameObject\Player\DemoPlayer.cpp" />
     <ClCompile Include="GameObject\Player\Player.cpp" />
     <ClCompile Include="GameObject\Skydome\Skydome.cpp" />
     <ClCompile Include="main.cpp" />
@@ -145,6 +146,7 @@
     <ClInclude Include="base\WinApp.h" />
     <ClInclude Include="GameObject\GameCamera\GameCamera.h" />
     <ClInclude Include="GameObject\Map\Map.h" />
+    <ClInclude Include="GameObject\Player\DemoPlayer.h" />
     <ClInclude Include="GameObject\Player\Player.h" />
     <ClInclude Include="GameObject\Skydome\Skydome.h" />
     <ClInclude Include="input\Input.h" />

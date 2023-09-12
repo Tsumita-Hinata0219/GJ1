@@ -18,6 +18,7 @@
 #include "CollisionConfig.h"
 #include "Collider.h"
 #include "Player.h"
+#include "DemoPlayer.h"
 
 #include <list>
 #include <sstream>
@@ -114,6 +115,7 @@ private: // メンバ変数
 	/* ----- Player 自キャラ ----- */
 	// 自キャラ
 	Player* player_ = nullptr;
+	DemoPlayer* demoPlayer_ = nullptr;
 
 
 

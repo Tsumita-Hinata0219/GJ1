@@ -132,6 +132,9 @@
     <ClCompile Include="GameObject\Player\Player.cpp">
       <Filter>ソース ファイル\GameObject\Player</Filter>
     </ClCompile>
+    <ClCompile Include="GameObject\Player\DemoPlayer.cpp">
+      <Filter>ソース ファイル\GameObject\Player</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="3d\ViewProjection.h">
@@ -246,6 +249,9 @@
       <Filter>ヘッダー ファイル\utilities\collider</Filter>
     </ClInclude>
     <ClInclude Include="GameObject\Player\Player.h">
+      <Filter>ヘッダー ファイル\GameObject\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="GameObject\Player\DemoPlayer.h">
       <Filter>ヘッダー ファイル\GameObject\Player</Filter>
     </ClInclude>
   </ItemGroup>
