@@ -1,4 +1,4 @@
-#include "DemoPlayer.h"
+ï»¿#include "DemoPlayer.h"
 
 
 
@@ -9,23 +9,23 @@ DemoPlayer::~DemoPlayer() {}
 
 void DemoPlayer::Initialize(Model* model, Vector3 position) {
 
-	// NULLƒ|ƒCƒ“ƒ^ƒ`ƒFƒbƒN
+	// NULLãƒã‚¤ãƒ³ã‚¿ãƒã‚§ãƒƒã‚¯
 	assert(model);
 
 	this->model_ = model;
 
 	playerTextureHandle_ = TextureManager::Load("/picture/uvChecker.png");
 
-	// ƒvƒŒƒCƒ„[
+	// ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼
 	worldTransform_.translation_ = position;
 	worldTransform_.Initialize();
 
 	isHit = 0;
 
-	// ƒVƒ“ƒOƒ‹ƒgƒ“ƒCƒ“ƒXƒ^ƒ“ƒX‚ğæ“¾‚·‚é
+	// ã‚·ãƒ³ã‚°ãƒ«ãƒˆãƒ³ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹ã‚’å–å¾—ã™ã‚‹
 	input_ = Input::GetInstance();
 
-	// Õ“Ë‘®«
+	// è¡çªå±æ€§
 	SetCollisionAttribute(kCollisionAttributePlayer);
 
 	uint32_t newCollisionAttribute = 0;
@@ -43,10 +43,10 @@ void DemoPlayer::Update() {
 
 	Move();
 
-	// s—ñ‚ğ’è”ƒoƒbƒtƒ@‚É“]‘—
+	// è¡Œåˆ—ã‚’å®šæ•°ãƒãƒƒãƒ•ã‚¡ã«è»¢é€
 	worldTransform_.TransferMatrix();
 
-	// ƒAƒtƒBƒ“•ÏŠ·s—ñ
+	// ã‚¢ãƒ•ã‚£ãƒ³å¤‰æ›è¡Œåˆ—
 	worldTransform_.matWorld_ = MakeAffineMatrix(
 	    worldTransform_.scale_, worldTransform_.rotation_, worldTransform_.translation_);
 
@@ -84,11 +84,11 @@ void DemoPlayer::Draw(ViewProjection viewProjection) {
 
 void DemoPlayer::Move() {
 
-	Vector3 move = {0.0f, 0.0f, 0.0f}; // ˆÚ“®ƒxƒNƒgƒ‹
+	Vector3 move = {0.0f, 0.0f, 0.0f}; // ç§»å‹•ãƒ™ã‚¯ãƒˆãƒ«
 
-	const float kCharacterSpeed = 0.3f; // ˆÚ“®‘¬“x
+	const float kCharacterSpeed = 0.3f; // ç§»å‹•é€Ÿåº¦
 
-	// ‰Ÿ‚µ‚½•ûŒü‚ÅˆÚ“®ƒxƒNƒgƒ‹‚ğ•ÏX
+	// æŠ¼ã—ãŸæ–¹å‘ã§ç§»å‹•ãƒ™ã‚¯ãƒˆãƒ«ã‚’å¤‰æ›´
 	if (input_->PushKey(DIK_A)) {
 		move.x -= kCharacterSpeed;
 	} else if (input_->PushKey(DIK_D)) {
@@ -104,7 +104,7 @@ void DemoPlayer::Move() {
 		isHit = false;
 	}
 
-	// ˆÚ“®s—ñ‚ÉˆÚ“®ƒxƒNƒgƒ‹‚ğ‰ÁZ
+	// ç§»å‹•è¡Œåˆ—ã«ç§»å‹•ãƒ™ã‚¯ãƒˆãƒ«ã‚’åŠ ç®—
 	worldTransform_.translation_ = Add(worldTransform_.translation_, move);
 }
 
@@ -126,10 +126,10 @@ void DemoPlayer::onCollision() { isHit = 1; }
 
 Vector3 DemoPlayer::GetWorldPosition() {
 
-	// ƒ[ƒ‹ƒhÀ•W‚ğæ“¾
+	// ãƒ¯ãƒ¼ãƒ«ãƒ‰åº§æ¨™ã‚’å–å¾—
 	Vector3 worldPos{};
 
-	// ƒ[ƒ‹ƒhs—ñ‚Ì•½sˆÚ“®¬•ª‚ğæ“¾(ƒ[ƒ‹ƒhÀ•W)
+	// ãƒ¯ãƒ¼ãƒ«ãƒ‰è¡Œåˆ—ã®å¹³è¡Œç§»å‹•æˆåˆ†ã‚’å–å¾—(ãƒ¯ãƒ¼ãƒ«ãƒ‰åº§æ¨™)
 	worldPos.x = worldTransform_.matWorld_.m[3][0];
 	worldPos.y = worldTransform_.matWorld_.m[3][1];
 	worldPos.z = worldTransform_.matWorld_.m[3][2];

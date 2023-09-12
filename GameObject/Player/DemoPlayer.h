@@ -1,4 +1,4 @@
-#pragma once
+ï»¿#pragma once
 #include <ImGuiManager.h>
 #include <Input.h>
 #include <Model.h>
@@ -35,15 +35,15 @@ public:
 	AABB GetAABB() override;
 
 private:
-	WorldTransform worldTransform_; // ƒ[ƒ‹ƒh•ÏŠ·ƒf[ƒ^
+	WorldTransform worldTransform_; // ãƒ¯ãƒ¼ãƒ«ãƒ‰å¤‰æ›ãƒ‡ãƒ¼ã‚¿
 
-	Model* model_ = nullptr; // ƒ‚ƒfƒ‹
+	Model* model_ = nullptr; // ãƒ¢ãƒ‡ãƒ«
 
-	uint32_t playerTextureHandle_ = 0u; // ƒeƒNƒXƒ`ƒƒƒnƒ“ƒhƒ‹
+	uint32_t playerTextureHandle_ = 0u; // ãƒ†ã‚¯ã‚¹ãƒãƒ£ãƒãƒ³ãƒ‰ãƒ«
 
-	Input* input_ = nullptr; // ƒL[ƒ{[ƒh“ü—Í
+	Input* input_ = nullptr; // ã‚­ãƒ¼ãƒœãƒ¼ãƒ‰å…¥åŠ›
 
-	const float radius_ = 2.0f; // ”¼Œa
+	const float radius_ = 2.0f; // åŠå¾„
 
 	AABB aabb_;
 
