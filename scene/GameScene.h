@@ -27,6 +27,7 @@
 #include <iostream>
 
 
+
 /// <summary>
 /// ゲームシーン
 /// </summary>
@@ -89,7 +90,7 @@ public: // メンバ関数
 	/// <summary>
 	/// マップを生成する
 	/// </summary>
-	void GeneratedMap(Vector3 pos, uint32_t mapBoxTextureHandle, uint32_t filter);
+	void GeneratedMap(int index, Vector3 pos, uint32_t mapBoxTextureHandle, uint32_t filter);
 
 
 private: // メンバ変数
@@ -106,7 +107,39 @@ private: // メンバ変数
 
 
 
-	/* ----- コライダー ----- */
+	/* ----- Scene シーン ----- */
+	// シーン
+	Scene scene_ = TITLE;
+	// 現在選択しているステージ
+	uint32_t nowStageSelect_ = 1;
+
+
+	/* ----- 背景スプライト ----- */
+	// 背景スプライト
+	Sprite* titleSprite_ = nullptr;
+	Sprite* stageSelectSprite_ = nullptr;
+	Sprite* gameClearSprite_ = nullptr;
+	Sprite* gameOverSprite_ = nullptr;
+	Sprite* pushASprite_ = nullptr;
+	Sprite* pushBSprite_ = nullptr;
+	Sprite* pushXSprite_ = nullptr;
+	Sprite* pushYSprite_ = nullptr;
+	Sprite* pushLeftSprite_ = nullptr;
+	Sprite* pushRightSprite_ = nullptr;
+	// テクスチャ
+	uint32_t titleTextureHandle_;
+	uint32_t stageSelectTextureHandle_;
+	uint32_t gameClearTextureHandle_;
+	uint32_t gameOverTextureHandle_;
+	uint32_t pushATextureHandle_;
+	uint32_t pushBTextureHandle_;
+	uint32_t pushXTextureHandle_;
+	uint32_t pushYTextureHandle_;
+	uint32_t pushLeftTextureHandle_;
+	uint32_t pushRightTextureHandle_;
+
+
+	/* ----- CollisionManager コライダー ----- */
 	// コライダー
 	CollisionManager* collisionManager_ = nullptr;
 
@@ -123,7 +156,7 @@ private: // メンバ変数
 	// マップ
 	Map* map_ = nullptr;
 	// マップリスト
-	std::list<Map*> mapBoxs_;
+	std::list<Map*> mapBoxs_[4];
 	// マップ生成コマンド
 	std::stringstream mapBoxCreateCommands_[4];
 	// テクスチャ
@@ -147,6 +180,11 @@ private: // メンバ変数
 	DebugCamera* debugCamera_ = nullptr;
 	// デバッグカメラ有効
 	bool isDebugCameraActive_ = false;
+
+
+	/* ----- GamePad ゲームパッド ----- */
+	// ゲームパッドの状態を得る変数(XINPUT)
+	XINPUT_STATE joyState_;
 
 
 

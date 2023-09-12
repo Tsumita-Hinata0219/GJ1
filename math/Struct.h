@@ -11,6 +11,17 @@ struct StageData {
 	uint32_t boxTexture[10];
 };
 
+// シーン
+enum Scene {
+	TITLE,
+	STAGESELECT,
+	STAGE1,
+	STAGE2,
+	STAGE3,
+	STAGE4,
+	GAMECLEAR,
+	GAMEOVER,
+};
 
 // 球
 struct Sphere {
