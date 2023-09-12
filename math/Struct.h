@@ -7,10 +7,8 @@
 
 // マップCSV
 struct StageData {
-	const char* one;
-	const char* two;
-	const char* three;
-	const char* four;
+	const char* stageCSV[4];
+	uint32_t boxTexture[10];
 };
 
 

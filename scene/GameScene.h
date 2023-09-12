@@ -10,8 +10,14 @@
 #include "WorldTransform.h"
 #include "DebugCamera.h"
 
-#include "Map.h"
 #include "Function.h"
+#include "Map.h"
+#include "Skydome.h"
+#include "GameCamera.h"
+#include "CollisionManager.h"
+#include "CollisionConfig.h"
+#include "Collider.h"
+#include "Player.h"
 
 #include <list>
 #include <sstream>
@@ -53,19 +59,43 @@ public: // メンバ関数
 
 
 	/// <summary>
+	/// 衝突判定と応答
+	/// </summary>
+	//void CheckAllCollision();
+
+
+	/// <summary>
+	/// ステージを変更する
+	/// </summary>
+	void ChangeStage(int index);
+
+	void onCollision();
+
+
+	/// <summary>
 	/// マップデータの読み込み
 	/// </summary>
-	void LoadMapData(const char* fileName);
+	void LoadMapData(const char* fileName, int index);
 
 	/// <summary>
 	/// マップ生成スクリプト実行
 	/// </summary>
-	void UpdateMapData();
+	void UpdateMapData(int index);
+
+	/// <summary>
+	/// マップの座標を決める
+	/// </summary>
+	Vector3 CreateMapVector(int indexX, int indexY);
 
 	/// <summary>
 	/// マップを生成する
 	/// </summary>
-	void GeneratedMap(Vector3 pos);
+	void GeneratedMap(Vector3 pos, uint32_t mapBoxTextureHandle);
+
+
+private:
+
+	void CheckCollisitionPair(Collider* colliderA, Collider* colliderB);
 
 
 private: // メンバ変数
@@ -82,6 +112,17 @@ private: // メンバ変数
 
 
 
+	/* ----- コライダー ----- */
+	// コライダー
+	CollisionManager* collisionManager_ = nullptr;
+
+
+
+	/* ----- Player 自キャラ ----- */
+	// 自キャラ
+	Player* player_ = nullptr;
+
+
 
 	/* ----- マップ Map ----- */
 	// マップ
@@ -89,14 +130,24 @@ private: // メンバ変数
 	// マップリスト
 	std::list<Map*> mapBoxs_;
 	// マップ生成コマンド
-	std::stringstream mapBoxCreateCommands_;
+	std::stringstream mapBoxCreateCommands_[4];
 	// テクスチャ
-	uint32_t mapBoxTextureHandle_ = 0;
 	StageData stage_;
+	// 現在進行中のマップ
+	int nowMap_ = 0;
 
+
+	/* ----- SkyDome 天球 ----- */
+	// 天球
+	Skydome* skydome_ = nullptr;
+	Model* modelSkydome_ = nullptr;
 
 
 	/* ----- Camera カメラ ----- */
+	// ゲームカメラ
+	GameCamera* gameCamera_ = nullptr;
+	WorldTransform gameCameraTransform_;
+	
 	// デバッグカメラ
 	DebugCamera* debugCamera_ = nullptr;
 	// デバッグカメラ有効

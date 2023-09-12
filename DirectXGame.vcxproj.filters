@@ -58,6 +58,42 @@
     <Filter Include="ヘッダー ファイル\GameObject">
       <UniqueIdentifier>{a704b6fc-8c7c-4d63-a364-064f5388765d}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ソース ファイル\GameObject\Map">
+      <UniqueIdentifier>{7d05f0e1-2d9c-49e1-9f3c-2e2945699581}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\GameObject\Skydome">
+      <UniqueIdentifier>{63ce7ef0-4e24-48f3-ab06-6c5b3ff0b2ce}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ヘッダー ファイル\GameObject\Map">
+      <UniqueIdentifier>{402a6694-6990-4d57-9c43-50dfaa0f6beb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ヘッダー ファイル\GameObject\Skydome">
+      <UniqueIdentifier>{757e78bc-d591-41eb-af1b-f0adbe031a04}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\GameObject\GameCamera">
+      <UniqueIdentifier>{e50e82b4-55d4-4aeb-9a02-8d4d15b42593}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ヘッダー ファイル\GameObject\GameCamera">
+      <UniqueIdentifier>{70ec9fb7-e7d8-4600-925c-0df79823bacd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ヘッダー ファイル\utilities">
+      <UniqueIdentifier>{53e40aa5-3725-4a85-90bd-45dd09652c2b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\utilities">
+      <UniqueIdentifier>{6168572c-46af-4c0a-ae84-5bad1fc2085a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\utilities\collider">
+      <UniqueIdentifier>{5f7b804b-6a9d-425f-b1b5-a6ea82abe4de}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ヘッダー ファイル\utilities\collider">
+      <UniqueIdentifier>{0f1967c0-242a-4925-a4c6-8e59f1deabb1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\GameObject\Player">
+      <UniqueIdentifier>{8907c017-f609-43a8-8443-86fd0206b51c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ヘッダー ファイル\GameObject\Player">
+      <UniqueIdentifier>{23753cc0-bd26-4fc3-af10-4bff765f107c}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -81,8 +117,20 @@
     <ClCompile Include="math\WorldTransformEx.cpp">
       <Filter>ソース ファイル\math</Filter>
     </ClCompile>
-    <ClCompile Include="GameObject\Map.cpp">
-      <Filter>ソース ファイル\GameObject</Filter>
+    <ClCompile Include="GameObject\Map\Map.cpp">
+      <Filter>ソース ファイル\GameObject\Map</Filter>
+    </ClCompile>
+    <ClCompile Include="GameObject\Skydome\Skydome.cpp">
+      <Filter>ソース ファイル\GameObject\Skydome</Filter>
+    </ClCompile>
+    <ClCompile Include="GameObject\GameCamera\GameCamera.cpp">
+      <Filter>ソース ファイル\GameObject\GameCamera</Filter>
+    </ClCompile>
+    <ClCompile Include="utilities\collider\CollisionManager.cpp">
+      <Filter>ソース ファイル\utilities\collider</Filter>
+    </ClCompile>
+    <ClCompile Include="GameObject\Player\Player.cpp">
+      <Filter>ソース ファイル\GameObject\Player</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -179,8 +227,26 @@
     <ClInclude Include="math\Struct.h">
       <Filter>ヘッダー ファイル\math</Filter>
     </ClInclude>
-    <ClInclude Include="GameObject\Map.h">
-      <Filter>ヘッダー ファイル\GameObject</Filter>
+    <ClInclude Include="GameObject\Map\Map.h">
+      <Filter>ヘッダー ファイル\GameObject\Map</Filter>
+    </ClInclude>
+    <ClInclude Include="GameObject\Skydome\Skydome.h">
+      <Filter>ヘッダー ファイル\GameObject\Skydome</Filter>
+    </ClInclude>
+    <ClInclude Include="GameObject\GameCamera\GameCamera.h">
+      <Filter>ヘッダー ファイル\GameObject\GameCamera</Filter>
+    </ClInclude>
+    <ClInclude Include="utilities\collider\Collider.h">
+      <Filter>ヘッダー ファイル\utilities\collider</Filter>
+    </ClInclude>
+    <ClInclude Include="utilities\collider\CollisionConfig.h">
+      <Filter>ヘッダー ファイル\utilities\collider</Filter>
+    </ClInclude>
+    <ClInclude Include="utilities\collider\CollisionManager.h">
+      <Filter>ヘッダー ファイル\utilities\collider</Filter>
+    </ClInclude>
+    <ClInclude Include="GameObject\Player\Player.h">
+      <Filter>ヘッダー ファイル\GameObject\Player</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
