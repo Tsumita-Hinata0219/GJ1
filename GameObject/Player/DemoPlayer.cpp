@@ -60,22 +60,22 @@ void DemoPlayer::Update() {
 	// AABBを求める
 	CalcAABB();
 
-#ifdef _DEBUG
-
-	ImGui::Begin("Player");
-
-	ImGui::DragFloat3("Translation", &worldTransform_.translation_.x, 0.01f);
-	ImGui::Text("isGroundHit : %d", isGroundHit);
-	ImGui::Text("isDamageHit : %d", isDamageHit);
-	ImGui::Text("isStartHit  : %d", isStartHit);
-	ImGui::Text("isGoalHit  : %d", isGoalHit);
-
-	ImGui::DragFloat3("Pla_Min", &aabb_.min.x, 0.1f, -1.0f, 5.0f);
-	ImGui::DragFloat3("Pla_Max", &aabb_.max.x, 0.1f, -1.0f, 5.0f);
-
-	ImGui::End();
-
-#endif
+//#ifdef _DEBUG
+//
+//	ImGui::Begin("Player");
+//
+//	ImGui::DragFloat3("Translation", &worldTransform_.translation_.x, 0.01f);
+//	ImGui::Text("isGroundHit : %d", isGroundHit);
+//	ImGui::Text("isDamageHit : %d", isDamageHit);
+//	ImGui::Text("isStartHit  : %d", isStartHit);
+//	ImGui::Text("isGoalHit  : %d", isGoalHit);
+//
+//	ImGui::DragFloat3("Pla_Min", &aabb_.min.x, 0.1f, -1.0f, 5.0f);
+//	ImGui::DragFloat3("Pla_Max", &aabb_.max.x, 0.1f, -1.0f, 5.0f);
+//
+//	ImGui::End();
+//
+//#endif
 }
 
 

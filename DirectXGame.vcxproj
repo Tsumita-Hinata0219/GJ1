@@ -63,7 +63,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(ProjectDir);$(ProjectDir)2d;$(ProjectDir)3d;$(ProjectDir)audio;$(ProjectDir)base;$(ProjectDir)input;$(ProjectDir)scene;$(ProjectDir)math;$(ProjectDir)GameObject;$(ProjectDir)Resources\picture;$(ProjectDir)Resources\sound;$(ProjectDir)Resources\parameter;$(ProjectDir)GameObject\Map;$(ProjectDir)GameObject\Skydome;$(ProjectDir)Resources\Skydome;$(ProjectDir)GameObject\GameCamera;$(ProjectDir)utilities\collider;$(ProjectDir)GameObject\Player;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir);$(ProjectDir)2d;$(ProjectDir)3d;$(ProjectDir)audio;$(ProjectDir)base;$(ProjectDir)input;$(ProjectDir)scene;$(ProjectDir)math;$(ProjectDir)GameObject;$(ProjectDir)Resources\picture;$(ProjectDir)Resources\sound;$(ProjectDir)Resources\parameter;$(ProjectDir)GameObject\Map;$(ProjectDir)GameObject\Skydome;$(ProjectDir)Resources\Skydome;$(ProjectDir)GameObject\GameCamera;$(ProjectDir)utilities\collider;$(ProjectDir)GameObject\Player;$(ProjectDir)GameObject\BoxType;$(ProjectDir)Resources;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
       <LanguageStandard>stdcpp20</LanguageStandard>
       <AdditionalOptions>/utf-8 %(AdditionalOptions)</AdditionalOptions>
@@ -86,7 +86,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>NDEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(ProjectDir);$(ProjectDir)2d;$(ProjectDir)3d;$(ProjectDir)audio;$(ProjectDir)base;$(ProjectDir)input;$(ProjectDir)scene;$(ProjectDir)math;$(ProjectDir)GameObject;$(ProjectDir)Resources\picture;$(ProjectDir)Resources\sound;$(ProjectDir)Resources\parameter;$(ProjectDir)GameObject\Map;$(ProjectDir)GameObject\Skydome;$(ProjectDir)Resources\Skydome;$(ProjectDir)GameObject\GameCamera;$(ProjectDir)utilities\collider;$(ProjectDir)GameObject\Player;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir);$(ProjectDir)2d;$(ProjectDir)3d;$(ProjectDir)audio;$(ProjectDir)base;$(ProjectDir)input;$(ProjectDir)scene;$(ProjectDir)math;$(ProjectDir)GameObject;$(ProjectDir)Resources\picture;$(ProjectDir)Resources\sound;$(ProjectDir)Resources\parameter;$(ProjectDir)GameObject\Map;$(ProjectDir)GameObject\Skydome;$(ProjectDir)Resources\Skydome;$(ProjectDir)GameObject\GameCamera;$(ProjectDir)utilities\collider;$(ProjectDir)GameObject\Player;$(ProjectDir)GameObject\BoxType;$(ProjectDir)Resources;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
       <Optimization>MinSpace</Optimization>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
@@ -109,6 +109,7 @@
     <ClCompile Include="2d\ImGuiManager.cpp" />
     <ClCompile Include="base\DirectXCommon.cpp" />
     <ClCompile Include="base\WinApp.cpp" />
+    <ClCompile Include="GameObject\BoxType\BoxType.cpp" />
     <ClCompile Include="GameObject\GameCamera\GameCamera.cpp" />
     <ClCompile Include="GameObject\Map\Map.cpp" />
     <ClCompile Include="GameObject\Player\DemoPlayer.cpp" />
@@ -144,6 +145,7 @@
     <ClInclude Include="base\StringUtility.h" />
     <ClInclude Include="base\TextureManager.h" />
     <ClInclude Include="base\WinApp.h" />
+    <ClInclude Include="GameObject\BoxType\BoxType.h" />
     <ClInclude Include="GameObject\GameCamera\GameCamera.h" />
     <ClInclude Include="GameObject\Map\Map.h" />
     <ClInclude Include="GameObject\Player\DemoPlayer.h" />

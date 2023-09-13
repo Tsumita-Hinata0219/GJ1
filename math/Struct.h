@@ -11,6 +11,14 @@ struct StageData {
 	uint32_t boxTexture[10];
 };
 
+// マップボックスのビット
+struct MapBit {
+	int GroundBox;
+	int DamageBox;
+	int StartBox;
+	int GoalBox;
+};
+
 // シーン
 enum Scene {
 	TITLE,

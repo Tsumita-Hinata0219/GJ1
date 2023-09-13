@@ -10,7 +10,7 @@ GameScene::~GameScene() {
 	//* 解放処理 *//
 
 	// Player プレイヤー
-	//delete player_;
+	delete player_;
 	delete demoPlayer_;
 
 	// Model モデル
@@ -111,17 +111,22 @@ void GameScene::Initialize() {
 
 
 	/* ----- Player 自キャラ ----- */
-	// player_ = new Player();
-	// Vector3 playerPosition(0.0f, 10.0f, 0.0f);
-	// player_->Initialize(model_, playerPosition);
+	 player_ = new Player();
+	Vector3 playerPos(0.0f, 0.0f, 0.0f);
+	// プレイヤーのOBJ
+	playerModel_ = Model::CreateFromOBJ("player", true);
+	// 初期化処理
+	player_->Initialize(playerModel_, playerPos);
+	// ステージに入るときの初期座標
+	IniPosStage1_ = {4.0f, -31.0f, 0.0f};
+	IniPosStage2_ = {4.0f, -43.0f, 0.0f};
+	IniPosStage3_ = {4.0f, -43.0f, 0.0f};
+	IniPosStage4_ = {2.1f, -30.0f, 0.0f};
+
 	demoPlayer_ = new DemoPlayer();
 	Vector3 deoPlayerPos(0.0f, 0.0f, 0.0f);
 	demoPlayer_->Initialize(model_, deoPlayerPos);
 	demoPlayer_->IsCollisionStateReset();
-	IniPosStage1_ = { 4.0f, -31.0f, 0.0f };
-	IniPosStage2_ = { 4.0f, -43.0f, 0.0f };
-	IniPosStage3_ = { 4.0f, -43.0f, 0.0f };
-	IniPosStage4_ = { 2.1f, -30.0f, 0.0f };
 
 
 
@@ -243,7 +248,7 @@ void GameScene::Update() {
 		    UpdateMapData(nowMap_);
 
 			/* ----- Player 自キャラ ----- */
-		    // player_->Update();
+		    player_->Update();
 		    demoPlayer_->Update();
 
 		    /* ----- Skydome 天球 ----- */
@@ -282,7 +287,7 @@ void GameScene::Update() {
 		    UpdateMapData(nowMap_);
 
 			/* ----- Player 自キャラ ----- */
-		    // player_->Update();
+		    player_->Update();
 		    demoPlayer_->Update();
 
 		    /* ----- Skydome 天球 ----- */
@@ -321,7 +326,7 @@ void GameScene::Update() {
 		    UpdateMapData(nowMap_);
 
 			/* ----- Player 自キャラ ----- */
-		    // player_->Update();
+		    player_->Update();
 		    demoPlayer_->Update();
 
 		    /* ----- Skydome 天球 ----- */
@@ -360,7 +365,7 @@ void GameScene::Update() {
 		    UpdateMapData(nowMap_);
 
 			/* ----- Player 自キャラ ----- */
-		    // player_->Update();
+		    player_->Update();
 		    demoPlayer_->Update();
 
 		    /* ----- Skydome 天球 ----- */
@@ -501,7 +506,7 @@ void GameScene::CheckAllCollision() {
 
 	// コライダーをリストに登録
 	// プレイヤー
-	//collisionManager_->ColliderPushBack(player_);
+	collisionManager_->ColliderPushBack(player_);
 	collisionManager_->ColliderPushBack(demoPlayer_);
 
 	// マップボックス
@@ -589,8 +594,8 @@ void GameScene::Draw() {
 	case STAGE1:
 
 		/* ----- Player 自キャラ ----- */
-		// player_->Draw(viewProjection_);
-		demoPlayer_->Draw(viewProjection_);
+		player_->Draw(viewProjection_);
+		//demoPlayer_->Draw(viewProjection_);
 
 		/* ----- Map マップ ----- */
 		// マップを描画する
@@ -599,15 +604,15 @@ void GameScene::Draw() {
 		}
 
 		/* ----- Skydome 天球 ----- */
-		skydome_->Draw(viewProjection_);
+		//skydome_->Draw(viewProjection_);
 
 		break;
 
 	case STAGE2:
 
 		/* ----- Player 自キャラ ----- */
-		// player_->Draw(viewProjection_);
-		demoPlayer_->Draw(viewProjection_);
+		player_->Draw(viewProjection_);
+		//demoPlayer_->Draw(viewProjection_);
 
 		/* ----- Map マップ ----- */
 		// マップを描画する
@@ -616,15 +621,15 @@ void GameScene::Draw() {
 		}
 
 		/* ----- Skydome 天球 ----- */
-		skydome_->Draw(viewProjection_);
+		//skydome_->Draw(viewProjection_);
 
 		break;
 
 	case STAGE3:
 
 		/* ----- Player 自キャラ ----- */
-		// player_->Draw(viewProjection_);
-		demoPlayer_->Draw(viewProjection_);
+		player_->Draw(viewProjection_);
+		//demoPlayer_->Draw(viewProjection_);
 
 		/* ----- Map マップ ----- */
 		// マップを描画する
@@ -633,15 +638,15 @@ void GameScene::Draw() {
 		}
 
 		/* ----- Skydome 天球 ----- */
-		skydome_->Draw(viewProjection_);
+		//skydome_->Draw(viewProjection_);
 
 		break;
 
 	case STAGE4:
 
 		/* ----- Player 自キャラ ----- */
-		// player_->Draw(viewProjection_);
-		demoPlayer_->Draw(viewProjection_);
+		player_->Draw(viewProjection_);
+		//demoPlayer_->Draw(viewProjection_);
 
 		/* ----- Map マップ ----- */
 		// マップを描画する
@@ -650,7 +655,7 @@ void GameScene::Draw() {
 		}
 
 		/* ----- Skydome 天球 ----- */
-		skydome_->Draw(viewProjection_);
+		//skydome_->Draw(viewProjection_);
 
 		break;
 	}
@@ -687,6 +692,7 @@ void GameScene::ChangeScene(Scene scene, int nextMap, Vector3 IniPos) {
 	nowMap_ = nextMap;
 
 	// ステージに入った時のプレイヤーの初期ポジション
+	player_->SetWorldPosition(IniPos);
 	demoPlayer_->SetWorldPosition(IniPos);
 
 	// 当たり判定のフラグをリセット
