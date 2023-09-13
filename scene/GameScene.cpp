@@ -744,13 +744,6 @@ void GameScene::UpdateMapData(int index) {
 
 				// 座標を決めてブロックを生成
 				GeneratedMap(index, CreateMapVector(colmnCount, lineCount), stage_.boxTexture[1], kCollisionAttributeMapBox_Ground);
-				
-				// プレイヤーのGroundMapBpxリストに送る
-				Map* newGround = new Map();
-				newGround->Initialize(
-				    model_, CreateMapVector(colmnCount, lineCount), stage_.boxTexture[1],
-				    kCollisionAttributeMapBox_Ground);
-				player_->AddGroundMap(newGround);
 
 			}
 			else if (stoi(strvec.at(colmnCount)) == 2) {
@@ -804,7 +797,4 @@ void GameScene::GeneratedMap(int index, Vector3 position, uint32_t mapBoxTexture
 	// マップを登録する
 	mapBoxs_[index].push_back(map_);
 }
-
-
-
 

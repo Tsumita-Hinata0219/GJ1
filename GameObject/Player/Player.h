@@ -9,7 +9,6 @@
 #include "CollisionConfig.h"
 #include "Collider.h"
 #include "BoxType.h"
-#include "Map.h"
 
 #include <list>
 
@@ -90,8 +89,6 @@ public:
 	void SetWorldPosition(Vector3 position) { worldTransform_.translation_ = position; }
 
 
-	void AddGroundMap(Map* ground);
-
 private:
 
 	// ワールド変換データ
@@ -166,8 +163,7 @@ private:
 	MapBit mapBit_;
 
 	// Mapリスト
-	Map* map_ = nullptr;
-	std::list<Map*> MapGrounds_;
+
 
 };
 

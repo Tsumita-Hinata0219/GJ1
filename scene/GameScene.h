@@ -150,7 +150,6 @@ private: // メンバ変数
 	Player* player_ = nullptr;
 	DemoPlayer* demoPlayer_ = nullptr;
 	Model* playerModel_ = nullptr;
-	;
 	// プレイヤーの初期ポジション
 	Vector3 IniPosStage1_;
 	Vector3 IniPosStage2_;
