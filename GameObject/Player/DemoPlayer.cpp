@@ -31,6 +31,7 @@ void DemoPlayer::Initialize(Model* model, Vector3 position) {
 	// 衝突属性
 	SetCollisionAttribute(kCollisionAttributePlayer);
 
+	// プレイヤーが誰と当たるのか
 	uint32_t newCollisionAttribute = 0;
 	newCollisionAttribute = newCollisionAttribute | kCollisionAttributeMapBox_Ground;
 	newCollisionAttribute = newCollisionAttribute | kCollisionAttributeMapBox_Damage;
@@ -44,6 +45,7 @@ void DemoPlayer::Initialize(Model* model, Vector3 position) {
 
 void DemoPlayer::Update() {
 
+	// 移動処理
 	Move();
 
 	// 行列を定数バッファに転送
@@ -55,6 +57,7 @@ void DemoPlayer::Update() {
 
 	worldTransform_.UpdateMatrix();
 
+	// AABBを求める
 	CalcAABB();
 
 #ifdef _DEBUG

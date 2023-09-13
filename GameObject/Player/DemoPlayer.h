@@ -16,24 +16,34 @@ public:
 	DemoPlayer();
 	~DemoPlayer();
 
+	// 初期化処理
 	void Initialize(Model* model, Vector3 position);
 
+	// 更新処理
 	void Update();
 
+	// 描画処理
 	void Draw(ViewProjection viewProjection);
 
+	// 移動処理
 	void Move();
 
+	// 当たり判定に必要なAABBを求める
 	void CalcAABB();
 
+	// 衝突時処理
 	void onCollision(int num) override;
 
+	// ワールド座標の取得
 	Vector3 GetWorldPosition() override;
 
+	// AABBの取得
 	AABB GetAABB() override;
 
+	// プレイヤーの座標の設定
 	void SetWorldPosition(Vector3 position);
 
+	// 衝突フラグのリセット
 	void IsCollisionStateReset();
 
 private:
