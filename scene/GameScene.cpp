@@ -81,15 +81,6 @@ void GameScene::Initialize() {
 	pushRightSprite_ = Sprite::Create(pushRightTextureHandle_, {832.0f, 550.0f});
 
 
-	/* ----- Player 自キャラ ----- */
-	//player_ = new Player();
-	//Vector3 playerPosition(0.0f, 10.0f, 0.0f);
-	//player_->Initialize(model_, playerPosition);
-	demoPlayer_ = new DemoPlayer();
-	Vector3 deoPlayerPos(0.0f, 0.0f, 0.0f);
-	demoPlayer_->Initialize(model_, deoPlayerPos);
-
-
 
 	/* ----- Map マップ ----- */
 	// マップボックスのテクスチャを読み込む
@@ -116,6 +107,17 @@ void GameScene::Initialize() {
 	}
 	// 現在進行中のステージ
 	nowMap_ = 0;
+
+
+
+	/* ----- Player 自キャラ ----- */
+	// player_ = new Player();
+	// Vector3 playerPosition(0.0f, 10.0f, 0.0f);
+	// player_->Initialize(model_, playerPosition);
+	demoPlayer_ = new DemoPlayer();
+	Vector3 deoPlayerPos(0.0f, 0.0f, 0.0f);
+	demoPlayer_->Initialize(model_, deoPlayerPos);
+
 
 
 	/* ----- Skydome 天球 ----- */
