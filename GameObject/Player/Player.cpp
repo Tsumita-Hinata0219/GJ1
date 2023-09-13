@@ -212,6 +212,11 @@ void Player::Move() {
 /// </summary>
 void Player::onCollision(int num) {
 
+	for (Map* ground : MapGrounds_) {
+
+		ground->GetAABB().max.y;
+	}
+
 	// 壁や床に当たった時の処理
 	if (num == mapBit_.GroundBox) {
 
@@ -467,5 +472,11 @@ void Player::HitBox() {
 			AddJustPositionOnBox(newPlayerY);
 		}
 	}
+}
+
+
+
+void Player::AddGroundMap(Map* ground) {
+	MapGrounds_.push_back(ground);
 }
 

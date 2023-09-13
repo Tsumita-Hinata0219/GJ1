@@ -244,8 +244,6 @@ void GameScene::Update() {
 		    for (Map* map : mapBoxs_[0]) {
 			    map->Update();
 		    }
-		    // マップ生成スクリプト実行
-		    UpdateMapData(nowMap_);
 
 			/* ----- Player 自キャラ ----- */
 		    player_->Update();
@@ -283,8 +281,6 @@ void GameScene::Update() {
 		    for (Map* map : mapBoxs_[1]) {
 			    map->Update();
 		    }
-		    // マップ生成スクリプト実行
-		    UpdateMapData(nowMap_);
 
 			/* ----- Player 自キャラ ----- */
 		    player_->Update();
@@ -322,8 +318,6 @@ void GameScene::Update() {
 		    for (Map* map : mapBoxs_[2]) {
 			    map->Update();
 		    }
-		    // マップ生成スクリプト実行
-		    UpdateMapData(nowMap_);
 
 			/* ----- Player 自キャラ ----- */
 		    player_->Update();
@@ -361,8 +355,6 @@ void GameScene::Update() {
 		    for (Map* map : mapBoxs_[3]) {
 			    map->Update();
 		    }
-		    // マップ生成スクリプト実行
-		    UpdateMapData(nowMap_);
 
 			/* ----- Player 自キャラ ----- */
 		    player_->Update();
@@ -688,9 +680,14 @@ void GameScene::ChangeScene(Scene scene, int nextMap, Vector3 IniPos) {
 	// シーンの切り替え
 	scene_ = scene;
 
-	// 進行中のマップを3に
+	// 進行中のマップ
 	nowMap_ = nextMap;
 
+	// 次のマップの情報を読み込んで、生成する
+	LoadMapData(stage_.stageCSV[nextMap], nextMap);
+	UpdateMapData(nextMap);
+
+	
 	// ステージに入った時のプレイヤーの初期ポジション
 	player_->SetWorldPosition(IniPos);
 	demoPlayer_->SetWorldPosition(IniPos);
@@ -747,6 +744,14 @@ void GameScene::UpdateMapData(int index) {
 
 				// 座標を決めてブロックを生成
 				GeneratedMap(index, CreateMapVector(colmnCount, lineCount), stage_.boxTexture[1], kCollisionAttributeMapBox_Ground);
+				
+				// プレイヤーのGroundMapBpxリストに送る
+				Map* newGround = new Map();
+				newGround->Initialize(
+				    model_, CreateMapVector(colmnCount, lineCount), stage_.boxTexture[1],
+				    kCollisionAttributeMapBox_Ground);
+				player_->AddGroundMap(newGround);
+
 			}
 			else if (stoi(strvec.at(colmnCount)) == 2) {
 
@@ -799,4 +804,7 @@ void GameScene::GeneratedMap(int index, Vector3 position, uint32_t mapBoxTexture
 	// マップを登録する
 	mapBoxs_[index].push_back(map_);
 }
+
+
+
 
