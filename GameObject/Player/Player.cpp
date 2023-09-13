@@ -128,10 +128,7 @@ void Player::CalcAABB() {
 
 
 
-void Player::onCollision() {
-
-	isHit = 1;
-}
+void Player::onCollision(int num) { num; }
 
 
 

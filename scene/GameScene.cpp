@@ -117,6 +117,11 @@ void GameScene::Initialize() {
 	demoPlayer_ = new DemoPlayer();
 	Vector3 deoPlayerPos(0.0f, 0.0f, 0.0f);
 	demoPlayer_->Initialize(model_, deoPlayerPos);
+	demoPlayer_->IsCollisionStateReset();
+	IniPosStage1_ = { 4.0f, -31.0f, 0.0f };
+	IniPosStage2_ = { 4.0f, -43.0f, 0.0f };
+	IniPosStage3_ = { 4.0f, -43.0f, 0.0f };
+	IniPosStage4_ = { 2.1f, -30.0f, 0.0f };
 
 
 
@@ -191,20 +196,20 @@ void GameScene::Update() {
 
 					// 現在選択しているステージに移動
 				    if (nowStageSelect_ == 1) {
-					    scene_ = STAGE1;
-					    nowMap_ = 0;
+
+						ChangeScene(STAGE1, 0, IniPosStage1_);
 				    } 
 					else if (nowStageSelect_ == 2) {
-					    scene_ = STAGE2;
-					    nowMap_ = 1;
+
+						ChangeScene(STAGE2, 1, IniPosStage2_);
 				    } 
 					else if (nowStageSelect_ == 3) {
-					    scene_ = STAGE3;
-					    nowMap_ = 2;
+
+						ChangeScene(STAGE3, 2, IniPosStage3_);
 				    } 
 					else if (nowStageSelect_ == 4) {
-					    scene_ = STAGE4;
-					    nowMap_ = 3;
+
+						ChangeScene(STAGE4, 3, IniPosStage4_);
 				    }
 				}
 		    }
@@ -230,22 +235,24 @@ void GameScene::Update() {
 		// ステージ１
 		case STAGE1:
 
-			/* ----- Player 自キャラ ----- */
-		    // player_->Update();
-		    demoPlayer_->Update();
-
-		    /* ----- Map マップ ----- */
+			/* ----- Map マップ ----- */
 		    for (Map* map : mapBoxs_[0]) {
 			    map->Update();
 		    }
 		    // マップ生成スクリプト実行
 		    UpdateMapData(nowMap_);
 
+			/* ----- Player 自キャラ ----- */
+		    // player_->Update();
+		    demoPlayer_->Update();
+
 		    /* ----- Skydome 天球 ----- */
 		    skydome_->Update();
 
 		    /* ----- CollisionManager 当たり判定 ----- */
 		    CheckAllCollision();
+
+
 
 			// ボタンを押したらシーン変更
 		    if (!Input::GetInstance()->GetJoystickState(0, joyState_)) {
@@ -267,22 +274,24 @@ void GameScene::Update() {
 		// ステージ2
 		case STAGE2:
 
-			/* ----- Player 自キャラ ----- */
-		    // player_->Update();
-		    demoPlayer_->Update();
-
-		    /* ----- Map マップ ----- */
+			 /* ----- Map マップ ----- */
 		    for (Map* map : mapBoxs_[1]) {
 			    map->Update();
 		    }
 		    // マップ生成スクリプト実行
 		    UpdateMapData(nowMap_);
 
+			/* ----- Player 自キャラ ----- */
+		    // player_->Update();
+		    demoPlayer_->Update();
+
 		    /* ----- Skydome 天球 ----- */
 		    skydome_->Update();
 
 		    /* ----- CollisionManager 当たり判定 ----- */
 		    CheckAllCollision();
+
+
 
 			// ボタンを押したらシーン変更
 		    if (!Input::GetInstance()->GetJoystickState(0, joyState_)) {
@@ -304,22 +313,24 @@ void GameScene::Update() {
 		// ステージ3
 	    case STAGE3:
 
-			/* ----- Player 自キャラ ----- */
-		    // player_->Update();
-		    demoPlayer_->Update();
-
-		    /* ----- Map マップ ----- */
+			/* ----- Map マップ ----- */
 		    for (Map* map : mapBoxs_[2]) {
 			    map->Update();
 		    }
 		    // マップ生成スクリプト実行
 		    UpdateMapData(nowMap_);
 
+			/* ----- Player 自キャラ ----- */
+		    // player_->Update();
+		    demoPlayer_->Update();
+
 		    /* ----- Skydome 天球 ----- */
 		    skydome_->Update();
 
 		    /* ----- CollisionManager 当たり判定 ----- */
 		    CheckAllCollision();
+
+
 
 			// ボタンを押したらシーン変更
 		    if (!Input::GetInstance()->GetJoystickState(0, joyState_)) {
@@ -341,22 +352,24 @@ void GameScene::Update() {
 		// ステージ4
 	    case STAGE4:
 
-			/* ----- Player 自キャラ ----- */
-		    // player_->Update();
-		    demoPlayer_->Update();
-
-		    /* ----- Map マップ ----- */
+			/* ----- Map マップ ----- */
 		    for (Map* map : mapBoxs_[3]) {
 			    map->Update();
 		    }
 		    // マップ生成スクリプト実行
 		    UpdateMapData(nowMap_);
 
+			/* ----- Player 自キャラ ----- */
+		    // player_->Update();
+		    demoPlayer_->Update();
+
 		    /* ----- Skydome 天球 ----- */
 		    skydome_->Update();
 
 		    /* ----- CollisionManager 当たり判定 ----- */
 		    CheckAllCollision();
+
+
 
 			// ボタンを押したらシーン変更
 		    if (!Input::GetInstance()->GetJoystickState(0, joyState_)) {
@@ -384,6 +397,7 @@ void GameScene::Update() {
 		    }
 		    if (joyState_.Gamepad.wButtons & XINPUT_GAMEPAD_A) {
 			    scene_ = STAGESELECT;
+			    demoPlayer_->IsCollisionStateReset();
 		    }
 
 			break;
@@ -398,6 +412,7 @@ void GameScene::Update() {
 		    }
 		    if (joyState_.Gamepad.wButtons & XINPUT_GAMEPAD_A) {
 			    scene_ = STAGESELECT;
+			    demoPlayer_->IsCollisionStateReset();
 		    }
 
 			break;
@@ -660,29 +675,23 @@ void GameScene::Draw() {
 }
 
 
+/// <summary>
+///	シーンの変更時の処理
+/// </summary>
+void GameScene::ChangeScene(Scene scene, int nextMap, Vector3 IniPos) {
 
-///// <summary>
-///// ステージを変更する
-///// </summary>
-//void GameScene::ChangeStage(int index) {
-//
-//	for (Map* map : mapBoxs_) {
-//		map->SetIsBreak(true);
-//	}
-//
-//	// 元からあったステージを削除する
-//	mapBoxs_.remove_if([](Map* map) {
-//		if (map->GetIsBreak()) {
-//			delete map;
-//			return true;
-//		}
-//		return false;
-//	});
-//
-//	index;
-//	//LoadMapData(stage_.stageCSV[index], index);
-//}
+	// シーンの切り替え
+	scene_ = scene;
 
+	// 進行中のマップを3に
+	nowMap_ = nextMap;
+
+	// ステージに入った時のプレイヤーの初期ポジション
+	demoPlayer_->SetWorldPosition(IniPos);
+
+	// 当たり判定のフラグをリセット
+	demoPlayer_->IsCollisionStateReset();
+}
 
 
 /// <summary>
@@ -755,7 +764,6 @@ void GameScene::UpdateMapData(int index) {
 }
 
 
-
 /// <summary>
 /// マップの座標を決める
 /// </summary>
@@ -769,7 +777,6 @@ Vector3 GameScene::CreateMapVector(int indexX, int indexY) {
 
 	return result;
 }
-
 
 
 /// <summary>

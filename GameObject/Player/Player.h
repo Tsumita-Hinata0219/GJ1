@@ -32,7 +32,7 @@ public:
 	void SetIsHit(bool falg) { isHit = falg; }
 
 
-	void onCollision() override;
+	void onCollision(int num) override;
 
 	Vector3 GetWorldPosition() override;
 

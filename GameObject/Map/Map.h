@@ -71,7 +71,7 @@ public:
 	/// <summary>
 	/// 衝突を検出したら呼びだされるコールバッグ関数
 	/// </summary>
-	void onCollision() override;
+	void onCollision(int num) override;
 
 
 	/// <summary>

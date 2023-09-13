@@ -20,10 +20,13 @@ void DemoPlayer::Initialize(Model* model, Vector3 position) {
 	worldTransform_.translation_ = position;
 	worldTransform_.Initialize();
 
-	isHit = 0;
-
 	// シングルトンインスタンスを取得する
 	input_ = Input::GetInstance();
+
+	isGroundHit = 0;
+	isDamageHit = 0;
+	isStartHit = 0;
+	isGoalHit = 0;
 
 	// 衝突属性
 	SetCollisionAttribute(kCollisionAttributePlayer);
@@ -59,7 +62,10 @@ void DemoPlayer::Update() {
 	ImGui::Begin("Player");
 
 	ImGui::DragFloat3("Translation", &worldTransform_.translation_.x, 0.01f);
-	ImGui::Text("isHit : %d", isHit);
+	ImGui::Text("isGroundHit : %d", isGroundHit);
+	ImGui::Text("isDamageHit : %d", isDamageHit);
+	ImGui::Text("isStartHit  : %d", isStartHit);
+	ImGui::Text("isGoalHit  : %d", isGoalHit);
 
 	ImGui::DragFloat3("Pla_Min", &aabb_.min.x, 0.1f, -1.0f, 5.0f);
 	ImGui::DragFloat3("Pla_Max", &aabb_.max.x, 0.1f, -1.0f, 5.0f);
@@ -101,7 +107,11 @@ void DemoPlayer::Move() {
 	}
 
 	if (input_->PushKey(DIK_R)) {
-		isHit = false;
+
+		isGroundHit = false; 
+		isDamageHit = false;
+		isStartHit = false;
+		isGoalHit = false;
 	}
 
 	// 移動行列に移動ベクトルを加算
@@ -122,7 +132,21 @@ void DemoPlayer::CalcAABB() {
 	};
 }
 
-void DemoPlayer::onCollision() { isHit = 1; }
+void DemoPlayer::onCollision(int num) { 
+	
+	if (num == 3){
+		isGroundHit = true;
+	} 
+	else if (num == 5) {
+		isDamageHit = true;
+	} 
+	else if (num == 9) {
+		isStartHit = true;
+	} 
+	else if (num == 17) {
+		isGoalHit = true;
+	}
+}
 
 Vector3 DemoPlayer::GetWorldPosition() {
 
@@ -137,4 +161,18 @@ Vector3 DemoPlayer::GetWorldPosition() {
 	return worldPos;
 }
 
+void DemoPlayer::SetWorldPosition(Vector3 position) {
+
+	worldTransform_.translation_ = position;
+}
+
 AABB DemoPlayer::GetAABB() { return aabb_; }
+
+
+void DemoPlayer::IsCollisionStateReset() {
+
+	isGroundHit = false;
+	isDamageHit = false;
+	isStartHit = false;
+	isGoalHit = false;
+}

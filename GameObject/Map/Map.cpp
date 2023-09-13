@@ -79,8 +79,9 @@ void Map::IsBreak() {
 /// <summary>
 /// 衝突時を検出したら呼びだされるコールバッグ関数
 /// </summary>
-void Map::onCollision() {
+void Map::onCollision(int num) {
 
+	num;
 }
 
 

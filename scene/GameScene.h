@@ -61,15 +61,15 @@ public: // メンバ関数
 
 
 	/// <summary>
-	/// 衝突判定と応答
+	///	シーンの変更時の処理
 	/// </summary>
-	void CheckAllCollision();
+	void ChangeScene(Scene scene, int nextMap, Vector3 IniPos);
 
 
 	/// <summary>
-	/// ステージを変更する
+	/// 衝突判定と応答
 	/// </summary>
-	void ChangeStage(int index);
+	void CheckAllCollision();
 
 
 	/// <summary>
@@ -149,6 +149,11 @@ private: // メンバ変数
 	// 自キャラ
 	Player* player_ = nullptr;
 	DemoPlayer* demoPlayer_ = nullptr;
+	// プレイヤーの初期ポジション
+	Vector3 IniPosStage1_;
+	Vector3 IniPosStage2_;
+	Vector3 IniPosStage3_;
+	Vector3 IniPosStage4_;
 
 
 

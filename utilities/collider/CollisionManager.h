@@ -24,6 +24,11 @@ public:
 	/// </summary>
 	void ColliderClear();
 
+	/// <summary>
+	/// 衝突判定計算
+	/// </summary>
+	bool CheckonCollision(AABB aabb1, AABB aabb2);
+
 private:
 
 	/// <summary>

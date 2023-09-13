@@ -26,13 +26,15 @@ public:
 
 	void CalcAABB();
 
-	void SetIsHit(bool falg) { isHit = falg; }
-
-	void onCollision() override;
+	void onCollision(int num) override;
 
 	Vector3 GetWorldPosition() override;
 
 	AABB GetAABB() override;
+
+	void SetWorldPosition(Vector3 position);
+
+	void IsCollisionStateReset();
 
 private:
 	WorldTransform worldTransform_; // ワールド変換データ
@@ -47,5 +49,8 @@ private:
 
 	AABB aabb_;
 
-	bool isHit;
+	bool isGroundHit;
+	bool isDamageHit;
+	bool isStartHit;
+	bool isGoalHit;
 };

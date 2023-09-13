@@ -13,7 +13,7 @@ public:
 	/// 純粋仮想関数
 	/// 衝突時に呼ばれる関数
 	/// </summary>
-	virtual void onCollision() = 0;
+	virtual void onCollision(int num) = 0;
 
 
 	/// <summary>
